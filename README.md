@@ -1,12 +1,12 @@
-#Employee Dashboard
+# Employee Dashboard
 The following are the instructions to setup and run the backend and frontend of the application.
-##Backend
+## Backend
 ```
 npm install
 node setup.js
 nodemon index.js
 ```
-##Frontend
+## Frontend
 ```
 npm install
 ng serve
