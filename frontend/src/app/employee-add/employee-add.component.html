@@ -31,11 +31,9 @@
   <h2>Upload Image</h2><input type="file" name="fileUplaod" id="fileUpload" multiple ng2FileSelect [uploader]="uploader">
   <div>
       <div class="row uploadList" *ngFor="let item of uploader.queue">
-          <div class="col-sm-4">{{item.file.name}}</div>
-          <div class="col-sm-4">
-                  <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
-                  <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
-          </div>
+          <h3>{{item.file.name}}</h3>
+          <button type="button" (click)="item.upload()">Upload</button>
+          <button type="button" (click)="item.remove()">Cancel</button>
       </div> 
   </div>
   <button mat-raised-button style="width: 50%; background-color: lightgreen; margin: auto" (click) = "onSubmit()"> Submit </button>

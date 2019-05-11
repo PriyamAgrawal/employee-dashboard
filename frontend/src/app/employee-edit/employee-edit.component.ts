@@ -17,8 +17,6 @@ export class EmployeeEditComponent implements OnInit {
   uploader:FileUploader = new FileUploader({url:uri});
   attachmentList:any = [];
   empID: number;
-  skills = new FormControl();
-  skillsList: string[] = ['Skill 1', 'Skill 2', 'Skill 3', 'Skill 4', 'Skill 5', 'Skill 6', 'Skill 7', 'Skill 8', 'Skill 9', 'Skill 10'];
   mySkills: any;
   name: string;
   salary: number;

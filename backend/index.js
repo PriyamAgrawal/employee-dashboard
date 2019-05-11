@@ -16,6 +16,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+const date = new Date(2016, 5, 21);
+
+console.log(date)
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 const employeeRoute = require('./routes/employee')

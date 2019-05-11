@@ -1,4 +1,4 @@
-<button mat-raised-button routerLink="/add" style="width: 30%; background-color: orange; align-content: center; text-transform: uppercase; font-size: 20px"> Add Employee </button>
+<button mat-raised-button routerLink="/add" style="background-color: #408227; color: white; font-size: 20px; display: block; margin: 24px auto;"> Add New Employee </button>
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
@@ -19,7 +19,7 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <div *ngIf = "element.image == null" class="example-element-diagram">
-          <img src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" height="100px" width="100px">
+          <img src="https://is.tuebingen.mpg.de/assets/noEmployeeImage_md-eaa7c21cc21b1943d77e51ab00a5ebe9.png" height="100px" width="100px">
         </div>
         <div *ngIf = "element.image" class="example-element-diagram">
           <img src='http://localhost:9000/{{element.image}}' height="100px" width="100px">
