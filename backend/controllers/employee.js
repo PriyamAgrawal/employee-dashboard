@@ -50,7 +50,7 @@ exports.addEmployees = (req, res) => {
 			res.status(500).send(err)
 		})
 	}).catch(err => {
-		res.status(500).send(err)
+		res.status(500).json({myerr: err})
 	})
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import { EmployeeService } from '../services/employee.service';
 import { Router } from '@angular/router'
 import { FileSelectDirective, FileUploader} from 'ng2-file-upload';
@@ -22,6 +22,7 @@ export class EmployeeAddComponent implements OnInit {
   name: string;
   salary: number;
   dob: Date;
+  msg: string;
   constructor(private employeeService: EmployeeService, private router: Router) {
     this.uploader.onCompleteItem = (item:any, response:any , status:any, headers:any) => {
       this.attachmentList.push(JSON.parse(response));
@@ -33,23 +34,33 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.dob)
-  	const newEmployee ={
-  		name: this.name,
-  		dob: this.dob,
-  		salary: this.salary,
-  		skills: this.skills.value,
-      image: this.imageName
-  	}
-    // console.log(newEmployee)
-  	this.employeeService.addEmployee(newEmployee)
-  		.subscribe(data => {
-  			if(data) {
-  				this.router.navigateByUrl('/')
-  			} else {
-  				console.log('error')
-  			}
-  		})
+    console.log(this.salary)
+    if(this.name == undefined || this.dob == undefined || this.salary == undefined || this.skills.value == null) {
+      this.msg = "There are some Fields missing"
+    } else {
+      const newEmployee ={
+        name: this.name,
+        dob: this.dob,
+        salary: this.salary,
+        skills: this.skills.value,
+        image: this.imageName
+      }
+      // console.log(newEmployee)
+      this.employeeService.addEmployee(newEmployee)
+        .subscribe(data => {
+          if(data) {
+            if(data.msg) {
+              this.msg = data.msg;
+            }
+            else {
+              this.router.navigateByUrl('/')
+            }
+          } else {
+            console.log('error')
+          }
+        })
+      // console.log(this.skills.value)
+    }
   }
 
 }
