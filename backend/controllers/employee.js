@@ -71,7 +71,8 @@ exports.editEmployees = (req, res) => {
 	const salary = req.body.salary
 	const dob = req.body.dob
 	const skills = req.body.skills
-	employee.findOneAndUpdate({employeeID: empID}, {$set: {name: name, salary: salary, dob:dob, skills: skills}}, {new: true, useFindAndModify: false})
+	const image = req.body.image
+	employee.findOneAndUpdate({employeeID: empID}, {$set: {name: name, salary: salary, dob:dob, skills: skills, image: image}}, {new: true, useFindAndModify: false})
 	.then(data => {
 		res.status(200).send(data)
 	}).catch(err => {

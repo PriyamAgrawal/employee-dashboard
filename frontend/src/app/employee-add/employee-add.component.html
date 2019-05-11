@@ -1,5 +1,8 @@
 <div class="form-container">
   <h1>Add Employee</h1>
+  <div *ngIf = "imageName" style="width: 50%; margin: auto;">
+    <img width="100%" src="http://localhost:9000/{{imageName}}">
+  </div>
   <mat-form-field>
     <input matInput placeholder="Name" [(ngModel)] = "name" required>
   </mat-form-field>
@@ -25,7 +28,7 @@
       <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
     </mat-select>
   </mat-form-field>
-  Upload Image<input type="file" name="fileUplaod" id="fileUpload" multiple ng2FileSelect [uploader]="uploader">
+  <h2>Upload Image</h2><input type="file" name="fileUplaod" id="fileUpload" multiple ng2FileSelect [uploader]="uploader">
   <div>
       <div class="row uploadList" *ngFor="let item of uploader.queue">
           <div class="col-sm-4">{{item.file.name}}</div>
