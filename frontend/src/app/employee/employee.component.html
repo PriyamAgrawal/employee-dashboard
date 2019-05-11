@@ -1,0 +1,46 @@
+<button mat-raised-button routerLink="/add" style="width: 30%; background-color: orange; align-content: center; text-transform: uppercase; font-size: 20px"> Add Employee </button>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <div *ngIf = "column=='dob'">
+      <td mat-cell *matCellDef="let element"> {{element[column] | date: 'dd/MM/yyyy'}} </td>
+    </div>
+    <div *ngIf = "column!='dob'">
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </div>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div *ngIf = "element.image == null" class="example-element-diagram">
+          <img src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" height="100px" width="100px">
+        </div>
+        <div *ngIf = "element.image" class="example-element-diagram">
+          <img src='http://localhost:9000/{{element.image}}' height="100px" width="100px">
+        </div>
+        <div class="example-element-description">
+          <span><h2>{{element.employeeID}} - {{element.name}}</h2>
+          <h2 class="example-element-description-attribution"> Some information about the particular employee </h2></span>
+          <button mat-raised-button (click)="deleteEmployee(element.employeeID)"> Delete</button>
+          <button mat-raised-button routerLink="/edit" [queryParams]="{id: element.employeeID}"> Edit</button>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<h2>*Click any column to expand</h2>

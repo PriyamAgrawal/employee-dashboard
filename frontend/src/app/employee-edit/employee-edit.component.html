@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h1>Edit Employee</h1>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)] = "name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker] = "myDatepicker" [(ngModel)] = "dob" placeholder="Select DOB">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Salary" [(ngModel)] = "salary">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Skills" [(ngModel)] = "mySkills" [formControl]="skills" multiple>
+      <mat-select-trigger>
+        {{skills.value ? skills.value[0] : ''}}
+        <span *ngIf="skills.value?.length > 1" class="example-additional-selection">
+          (+{{skills.value.length - 1}} {{skills.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button style="width: 50%; background-color: lightgreen; margin: auto" (click) = "onSubmit()"> Submit </button>
+  <br>
+  <button mat-raised-button style="width: 50%; background-color: red; margin: auto" (click) = "deleteEmployee()"> Delete </button>
+
+</div>
